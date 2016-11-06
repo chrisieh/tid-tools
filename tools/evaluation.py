@@ -5,7 +5,7 @@ from scipy.interpolate import interp1d
 
 
 def root_roc(sigf, bkgf, branch, tree="CollectionTree"):
-    """Returns fps, tpr, thr for two root-files containing classifier scores"""
+    """Returns fpr, tpr, thr for two root-files containing classifier scores"""
     sig = root2array(sigf, treename=tree, branches=[branch, "weight"])
     bkg = root2array(bkgf, treename=tree, branches=[branch, "weight"])
 
@@ -25,7 +25,7 @@ def root_roc(sigf, bkgf, branch, tree="CollectionTree"):
 
 
 def tmva_roc(rootf):
-    """Returns fps, tpr, thr for a TMVA-style root-file"""
+    """Returns fpr, tpr, thr for a TMVA-style root-file"""
     data = root2array(rootf, treename="TestTree",
                       branches=["classifier", "classID", "weight"])
     
@@ -39,8 +39,8 @@ def tmva_roc(rootf):
     return roc_curve(truth, data["classifier"], sample_weight=data["weight"])
 
 
-def eff_rej(fps, tpr):
-    """Calculate eff and rej from fps and tpr"""
+def eff_rej(fpr, tpr):
+    """Calculate eff and rej from fpr and tpr"""
     nonzero = (fps == 0)
     return tpr[nonzero], 1.0 / fps[nonzero]
 

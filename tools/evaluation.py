@@ -41,8 +41,8 @@ def tmva_roc(rootf):
 
 def eff_rej(fpr, tpr):
     """Calculate eff and rej from fpr and tpr"""
-    nonzero = (fps == 0)
-    return tpr[nonzero], 1.0 / fps[nonzero]
+    nonzero = (fpr == 0)
+    return tpr[nonzero], 1.0 / fpr[nonzero]
 
 
 def rej_fixed_eff(eff, rej, feff):
